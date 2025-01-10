@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductsService } from '../../../productPage/services/products.service';
 import { Router } from '@angular/router';
+import { Product } from '../../../productPage/types/product.interface ';
 @Component({
   selector: 'pro-productsForm',
   templateUrl: './productsForm.component.html',
@@ -12,7 +13,10 @@ import { Router } from '@angular/router';
 })
 export class ProductsFormComponent implements OnInit {
   productForm: FormGroup;
-  constructor (private productService:ProductsService,private router:Router){
+  product: any;
+  @Output() productStatus = new EventEmitter<boolean>();
+
+  constructor(private productService: ProductsService, private router: Router) {
     this.productForm = new FormGroup({
       productID: new FormControl(null, Validators.required),
       productName: new FormControl('', Validators.required),
@@ -23,15 +27,13 @@ export class ProductsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.product = history.state.product;
   }
   onSubmit() {
     console.log('Product Submitted:', this.productForm.value);
     const res = this.productService.addProduct(this.productForm.value)
     res.subscribe((value) => {
-      if(value){
-        this.router.navigate(['/'])
-      }
+      return this.productStatus.emit(value)
     })
   }
 

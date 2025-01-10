@@ -1,39 +1,40 @@
 @if(products$|async)
 {
-  
-  <div class = container>
-    <div class="d-flex justify-content-end container-button">
-      <button type="button" class="btn btn-info mb-2" style="width: 150px; height: 50px;"  routerLink="/addproducts">Add Product</button>
-    </div>
-    <table class="table table-bordered ">
-  <thead>
-    <tr>
-      <th>Product ID</th>
-      <th>Product Name</th>
-      <th>Category</th>
-      <th>Price</th>
-      <th>Stock Quantity</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (product of products$|async; track product) {
-    <tr>
-      
-      <td>{{product.productID  }}</td>
-      <td>{{ product.productName }}</td>
-      <td>{{ product.category }}</td>
-      <td>{{ product.price }}</td>
-      <td>{{ product.stockQuantity }}</td>
-      <td class="text-center">
-        <div class="d-flex justify-content-center gap-2">
-          <button type="button" class="btn btn-primary">Edit</button>
-          <button type="button" class="btn btn-danger" (click)="deleteProduct(product)">Delete</button>
-        </div>
-        
+
+<div class=container>
+  <div class="d-flex justify-content-end container-button">
+    <button type="button" class="btn btn-info mb-2" style="width: 150px; height: 50px;" routerLink="/addproduct">Add
+      Product</button>
+  </div>
+  <table class="table table-bordered ">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock Quantity</th>
+        <th>Actions</th>
       </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      @for (product of products$|async; track product) {
+      <tr>
+
+        <td>{{product.productID }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stockQuantity }}</td>
+        <td class="text-center">
+          <div class="d-flex justify-content-center gap-2">
+            <button type="button" class="btn btn-primary" (click)="changeRoute(product)">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="deleteProduct(product)">Delete</button>
+          </div>
+
+      </tr>
+      }
+    </tbody>
+  </table>
 </div>
 }

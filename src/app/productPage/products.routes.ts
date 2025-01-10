@@ -1,6 +1,7 @@
 import { Route, RouterModule } from '@angular/router';
 import { ProductsComponent } from './components/products/products.component';
-import { ProductsFormComponent } from '../shared/components/productsForm/productsForm.component';
+import { AddProductComponent } from './components/addProduct/addProduct.component';
+import { EditProductComponent } from './components/editProduct/editProduct.component';
 
 export const productRoutes: Route[] = [
     {  
@@ -10,8 +11,13 @@ export const productRoutes: Route[] = [
     },
   {  
 
-    path:'addproducts',
-    component:ProductsFormComponent
+    path:'addproduct',
+    component:AddProductComponent
+  },
+  {
+    path:'editproduct',
+    component:EditProductComponent
   }
+
 ];
 

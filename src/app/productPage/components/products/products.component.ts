@@ -3,7 +3,7 @@ import { ProductsService } from '../../services/products.service';
 import { CommonModule } from '@angular/common';
 import { filter, map, Observable } from 'rxjs';
 import { Product } from '../../types/product.interface ';
-import { RouterLink } from '@angular/router';
+import { RouterLink ,Router} from '@angular/router';
 @Component({
   selector: 'pro-products',
   templateUrl: './products.component.html',
@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
   isDeleting:boolean = false 
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService,private router:Router) { }
   products$!: Observable<Product[]>
   ngOnInit() {
     this.products$ = this.productService.getAllProducts()
@@ -24,6 +24,12 @@ export class ProductsComponent implements OnInit {
   this.productService.deleteProduct(productDetaills).subscribe(data => console.log(data))
     this.products$ = this.productService.getAllProducts()
   };
+  changeRoute(productDetaills: Product){
+    this.router.navigate(["/editproducts"], {
+      state: { product: productDetaills },
+    })
+  }
+
 
 
 }
