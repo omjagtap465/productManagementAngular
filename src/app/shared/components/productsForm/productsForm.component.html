@@ -1,0 +1,57 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="container mt-5">
+  <div class="row mb-3">
+    <label for="productId" class="col-sm-2 col-form-label">Product ID</label>
+    <div class="col-sm-10">
+      <input type="number" id="productID" class="form-control" formControlName="productID">
+      <div *ngIf="productForm.get('productId')?.invalid && productForm.get('productId')?.touched" class="text-danger">
+        Product ID is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="productName" class="col-sm-2 col-form-label">Product Name</label>
+    <div class="col-sm-10">
+      <input type="text" id="productName" class="form-control" formControlName="productName">
+      <div *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched" class="text-danger">
+        Product Name is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="category" class="col-sm-2 col-form-label">Category</label>
+    <div class="col-sm-10">
+      <input type="text" id="category" class="form-control" formControlName="category">
+      <div *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched" class="text-danger">
+        Category is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="price" class="col-sm-2 col-form-label">Price</label>
+    <div class="col-sm-10">
+      <input type="number" id="price" class="form-control" formControlName="price">
+      <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">
+        Price is required and must be greater than 0.
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="stockQuantity" class="col-sm-2 col-form-label">Stock Quantity</label>
+    <div class="col-sm-10">
+      <input type="number" id="stockQuantity" class="form-control" formControlName="stockQuantity">
+      <div *ngIf="productForm.get('stockQuantity')?.invalid && productForm.get('stockQuantity')?.touched" class="text-danger">
+        Stock Quantity is required and must be greater than 0.
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-10 offset-sm-2">
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Submit</button>
+    </div>
+  </div>
+</form>

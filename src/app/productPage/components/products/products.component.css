@@ -1,0 +1,13 @@
+.container {
+    width: 100vw;
+    /* Adjust the table's width as needed */
+    max-width: 70%;
+    height:50vh;
+    background-color: white;
+    border-collapse: collapse;
+}
+.container-button{
+    width: auto;
+    max-width: 100%;
+
+}
