@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductsService } from '../../../productPage/services/products.service';
 import { Router } from '@angular/router';
@@ -13,8 +13,8 @@ import { Product } from '../../../productPage/types/product.interface ';
 })
 export class ProductsFormComponent implements OnInit {
   productForm: FormGroup;
-  product: any;
-  @Output() productStatus = new EventEmitter<boolean>();
+  @Input() initialProduct?: Product;
+  @Output() productStatus = new EventEmitter<Product>();
 
   constructor(private productService: ProductsService, private router: Router) {
     this.productForm = new FormGroup({
@@ -27,14 +27,20 @@ export class ProductsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.product = history.state.product;
+    if (this.initialProduct) {
+      this.productForm.patchValue({
+        productID: this.initialProduct.productID,
+        productName: this.initialProduct.productName,
+        category: this.initialProduct.category,
+        price: this.initialProduct.price,
+        stockQuantity: this.initialProduct.stockQuantity,
+      })
+    }
   }
   onSubmit() {
     console.log('Product Submitted:', this.productForm.value);
-    const res = this.productService.addProduct(this.productForm.value)
-    res.subscribe((value) => {
-      return this.productStatus.emit(value)
-    })
+    
+      return this.productStatus.emit(this.productForm.value)
   }
 
 }

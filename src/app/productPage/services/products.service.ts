@@ -18,8 +18,13 @@ export class ProductsService {
     console.log(body)
     return this.http.post<boolean>(this.apiUrl, body)
   }
-  deleteProduct(productDetails: Product):Observable<boolean> {
+  deleteProduct(productDetails: Product): Observable<boolean> {
     console.log(productDetails)
     return this.http.delete<boolean>(this.apiUrl, { body: productDetails });
+  }
+  updateProduct(productDetails: Product): Observable<boolean> {
+    console.log(productDetails);
+    return this.http.put<boolean>(this.apiUrl,productDetails);
+
   }
 }

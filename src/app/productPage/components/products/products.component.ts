@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit {
     this.products$ = this.productService.getAllProducts()
   };
   changeRoute(productDetaills: Product){
-    this.router.navigate(["/editproducts"], {
+    this.router.navigate(["/editproduct"], {
       state: { product: productDetaills },
     })
   }
